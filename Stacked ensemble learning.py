@@ -1,23 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 24 09:50:41 2024
 
-@author: rsadeghianbroujeny
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jun  4 10:07:10 2024
-
-@author: rsadeghianbroujeny
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu May 30 14:35:14 2024
-
-@author: rsadeghianbroujeny
-"""
 
 # -*- coding: utf-8 -*-
 """
@@ -547,41 +528,5 @@ np.save('r2_convlstm',r2_convlstm)
 np.save('r2_convmlp',r2_convmlp)
 np.save('r2_meta',r2_meta)  
 
-data=[error_rmse[0,:],error_rmse[1,:],error_rmse[2,:],error_rmse[3,:],error_rmse[4,:],error_rmse[5,:],
-                      error_rmse[6,:],error_rmse[7,:],error_rmse[8,:],error_rmse[9,:],error_rmse[10,:],error_rmse[11,:],
-                      error_rmse[12,:],error_rmse[13,:],error_rmse[14,:],error_rmse[15,:],error_rmse[16,:],error_rmse[17,:],
-                            error_rmse[18,:],error_rmse[19,:],error_rmse[20,:],
-                            error_rmse[21,:],error_rmse[22,:],error_rmse[23,:],error_rmse[24,:],error_rmse[25,:],error_rmse[26,:],
-                                  error_rmse[27,:],error_rmse[28,:],error_rmse[29,:]]
-fig, ax = plt.subplots()
-meanlineprops = dict(linestyle='--', linewidth=2.5, color='orange')
-
-# Define properties for the median line
-medianlineprops = dict(linestyle='-', linewidth=2.5, color='blue')
-
-# Create the boxplot with the mean and median line properties
-ax.boxplot(data, showmeans=True, meanline=True, meanprops=meanlineprops, medianprops=medianlineprops)
-
-in1=12427                   
-in2=12614
-plt.plot(real_y_test[in1:in2],label='Ground truth')
-
-plt.plot(real_predictions_test_meta[in1:in2],label='Prediction_Anfis')
-
-plt.plot(real_predictions_test_convmlp[in1:in2],label='Prediction_ConvMlp')
-
-plt.plot(real_predictions_test_convlstm[in1:in2],label='Prediction_ConvLstm')
-
-plt.legend(loc='lower left', fontsize='large', title_fontsize='medium')
 
 
-X_test_meta_last_instance=np.concatenate((predictions_rul_convlstm,predictions_rul_convmlp), axis=1)
-last_instances_y=last_instances_y*[(val_max_train[0,13]-val_min_train[0,13])]+val_min_train[0,13]
-
-predictions_rul_meta_lst_instances=fis(X_test_meta_last_instance)
-predictions_rul_meta_lst_instances_real=predictions_rul_meta_lst_instances*[(val_max_train[0,13]-val_min_train[0,13])]+val_min_train[0,13]
-plt.plot(last_instances_y,label='Ground truth')
-plt.plot(predictions_rul_meta_lst_instances_real,label='Prediction_Anfis')
-plt.plot(real_predictions_rul_convmlp,label='Prediction_ConvMlp')
-plt.plot(real_predictions_rul_convlstm,label='Prediction_ConvLstm')
-plt.legend(loc='lower left', fontsize='large', title_fontsize='medium')
